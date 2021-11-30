@@ -32,28 +32,13 @@ const librarySlice = createSlice({
     // longtitude: null,
     // owner: null,
   },
-  reducers: {
-    [getLibraries.pending]: (state, action) => {
-      console.log(state, action);
-      state.status = "loading";
-    },
-    [getLibraries.fulfilled]: (state, action) => {
-      console.log(state, action);
-      state.status = "success";
-      state.libraries = action.payload;
-      console.log(state.libraries);
-    },
-    [getLibraries.rejected]: (state, action) => {
-      state.status = "failed";
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getLibraries.fulfilled, (state, action) => {
       // Add user to the state array
       state.status = "success";
       state.libraries = action.payload;
-      console.log(state.libraries);
     });
   },
 });
