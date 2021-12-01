@@ -2,15 +2,31 @@ import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import { useDispatch } from "react-redux";
+import { createLibrary } from "../../store/librarySlice";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const LibraryNewForm = () => {
+  const dispatch = useDispatch();
   const mapContainer = useRef(null);
   const map = useRef(null);
+  const popupRef = useRef();
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
+  let result = useRef();
+
+  const createLibraryHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      createLibrary({
+        latitude: result.current.center[0],
+        longitude: result.current.center[1],
+        location: result.current.center.place_name,
+      })
+    );
+  };
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -25,18 +41,20 @@ const LibraryNewForm = () => {
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
       marker: false,
-      // marker: {
-      //   color: "orange",
-      // },
     });
 
     geocoder.on("result", (e) => {
       console.log(e.result.center);
       console.log(e.result);
+
+      result.current = e.result;
+
       const popup = new mapboxgl.Popup({ offset: 25 }) // add popups
-        .setHTML(`<h3>${e.result.place_name}</h3><button
-            
-          >Add Library</button>`);
+        .setDOMContent(popupRef.current);
+      // .setHTML(`<h3>${e.result.place_name}</h3>
+      //  <form onSubmit={createLibraryHandler(e.result)}>
+      //   <button type="submit">Add Library</button>
+      // </form> `);
 
       new mapboxgl.Marker()
         .setLngLat(e.result.center)
@@ -60,6 +78,15 @@ const LibraryNewForm = () => {
   return (
     <div>
       <div ref={mapContainer} className="map-container" />
+      <div style={{ display: "none" }}>
+        <div ref={popupRef}>
+          <h3>${result?.current?.place_name}</h3>
+          {/* <form onSubmit={createLibraryHandler(result?.current)}> */}
+          <form onSubmit={createLibraryHandler}>
+            <button type="submit">Add Library</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
