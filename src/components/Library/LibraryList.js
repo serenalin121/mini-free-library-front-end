@@ -4,7 +4,7 @@ const LibraryList = (props) => {
   return (
     <ul>
       {props.libraries.map((library, i) => {
-        return <li key={i}>{library.location}</li>;
+        return <li key={i}>{library.location} </li>;
       })}
     </ul>
   );
