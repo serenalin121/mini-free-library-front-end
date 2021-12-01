@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import store from "./store/index";
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./index.css";
 import App from "./App";
 
