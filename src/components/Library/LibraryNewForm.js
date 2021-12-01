@@ -21,9 +21,9 @@ const LibraryNewForm = () => {
     e.preventDefault();
     dispatch(
       createLibrary({
-        latitude: result.current.center[0],
-        longitude: result.current.center[1],
-        location: result.current.center.place_name,
+        longitude: result.current.center[0],
+        latitude: result.current.center[1],
+        location: result.current.place_name,
       })
     );
   };
@@ -80,7 +80,7 @@ const LibraryNewForm = () => {
       <div ref={mapContainer} className="map-container" />
       <div style={{ display: "none" }}>
         <div ref={popupRef}>
-          <h3>${result?.current?.place_name}</h3>
+          <h3>{result?.current?.place_name}</h3>
           {/* <form onSubmit={createLibraryHandler(result?.current)}> */}
           <form onSubmit={createLibraryHandler}>
             <button type="submit">Add Library</button>
