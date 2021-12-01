@@ -21,14 +21,33 @@ const LibraryNewForm = () => {
       zoom: zoom,
     });
 
-    map.current.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl,
-      })
-    );
-  });
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      marker: false,
+      // marker: {
+      //   color: "orange",
+      // },
+    });
 
+    geocoder.on("result", (e) => {
+      console.log(e.result.center);
+      console.log(e.result);
+      const popup = new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(`<h3>${e.result.place_name}</h3><button
+            
+          >Add Library</button>`);
+
+      new mapboxgl.Marker()
+        .setLngLat(e.result.center)
+        .setPopup(popup)
+        .addTo(map.current);
+
+      popup.addTo(map.current);
+    });
+
+    map.current.addControl(geocoder);
+  });
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
     map.current.on("move", () => {
@@ -40,9 +59,6 @@ const LibraryNewForm = () => {
 
   return (
     <div>
-      <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-      </div>
       <div ref={mapContainer} className="map-container" />
     </div>
   );
