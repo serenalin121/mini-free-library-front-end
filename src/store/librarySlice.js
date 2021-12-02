@@ -2,27 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const baseUrl = "http://localhost:3003/library";
 
-// export const createLibrary = createAsyncThunk(
-//   "libraries/create",
-//   async (dispatch, getState) => {
-//     return await fetch(baseUrl, {
-//       method: "POST",
-//       body: JSON.stringify({
-//         location: getState.name,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     }).then((res) => res.json());
-//   }
-// );
-
 export const getLibraries = createAsyncThunk("libraries/get", async () => {
   return await fetch(baseUrl).then((res) => res.json());
 });
 
 export const createLibrary = createAsyncThunk(
-  "libraries/post",
+  "library/post",
   async ({ latitude, longitude, location }) => {
     return await fetch(baseUrl, {
       method: "POST",
@@ -32,13 +17,19 @@ export const createLibrary = createAsyncThunk(
   }
 );
 
+export const deleteLibrary = createAsyncThunk(
+  "library/delete",
+  async ({ id }) => {
+    return await fetch(baseUrl + "/" + id, {
+      method: "DELETE",
+    }).then((res) => res.json());
+  }
+);
+
 const librarySlice = createSlice({
   name: "library",
   initialState: {
     libraries: [],
-    // latitude: null,
-    // longtitude: null,
-    // owner: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -48,10 +39,17 @@ const librarySlice = createSlice({
       state.status = "success";
       state.libraries = action.payload;
     });
+
     builder.addCase(createLibrary.fulfilled, (state, action) => {
       // Add user to the state array
       state.status = "success";
       state.libraries.push(action.payload);
+    });
+
+    builder.addCase(deleteLibrary.fulfilled, (state, action) => {
+      // Add user to the state array
+      state.status = "success";
+      state.libraries.filter((lib) => lib._id === action.payload._id);
     });
   },
 });

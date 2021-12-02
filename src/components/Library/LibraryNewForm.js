@@ -81,7 +81,6 @@ const LibraryNewForm = () => {
       <div style={{ display: "none" }}>
         <div ref={popupRef}>
           <h3>{result?.current?.place_name}</h3>
-          {/* <form onSubmit={createLibraryHandler(result?.current)}> */}
           <form onSubmit={createLibraryHandler}>
             <button type="submit">Add Library</button>
           </form>
