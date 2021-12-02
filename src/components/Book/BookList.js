@@ -1,13 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteBook } from "../../store/bookSlice";
 
 const BookList = (props) => {
+  const dispatch = useDispatch();
+
+  const deleteBookHandler = (id) => {
+    dispatch(deleteBook({ bookId: id }));
+  };
+
   return (
     <ul>
       {props.books.map((book, i) => {
         return (
           <li key={i}>
-            <Link to={`/books/${book._id}`}>{book.name} </Link>
+            {book.name}
+            <button onClick={() => deleteBookHandler(book._id)}>Delete</button>
           </li>
         );
       })}

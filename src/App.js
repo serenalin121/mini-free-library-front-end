@@ -4,7 +4,6 @@ import "./App.css";
 import LibraryContainer from "./components/Library/LibraryContainer";
 import MainHeader from "./components/MainHeader";
 import LibraryDetail from "./components/Library/LibraryDetail";
-import BookContainer from "./components/Book/BookContainer";
 
 function App() {
   return (
@@ -17,9 +16,7 @@ function App() {
             element={<h1>📚 Welcome to Mini Free Library! 📚</h1>}
           />
           <Route path="/library" element={<LibraryContainer />} />
-          <Route path="/library/:libraryId" element={<LibraryDetail />}>
-            <Route path="books" element={<BookContainer />} />
-          </Route>
+          <Route path="/library/:libraryId/" element={<LibraryDetail />} />
         </Routes>
       </main>
     </div>
