@@ -11,7 +11,7 @@ const BookContainer = (props) => {
 
   useEffect(() => {
     dispatch(getBooks({ libId: props.libId }));
-  }, [dispatch, props.libId]);
+  }, [dispatch, props.libId, books]);
 
   return (
     <div>

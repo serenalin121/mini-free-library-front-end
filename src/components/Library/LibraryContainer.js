@@ -11,7 +11,7 @@ const LibraryContainer = () => {
 
   useEffect(() => {
     dispatch(getLibraries());
-  }, [dispatch]);
+  }, [dispatch, libraries]);
 
   return (
     <div>
