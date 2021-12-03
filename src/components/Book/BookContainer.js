@@ -8,10 +8,11 @@ import BookList from "./BookList";
 const BookContainer = (props) => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
+  console.log(books);
 
   useEffect(() => {
     dispatch(getBooks({ libId: props.libId }));
-  }, [dispatch, props.libId, books]);
+  }, [dispatch, props.libId]);
 
   return (
     <div>

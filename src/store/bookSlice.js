@@ -27,7 +27,7 @@ export const deleteBook = createAsyncThunk(
   async ({ bookId }) => {
     return await fetch(baseUrl + "/" + bookId, {
       method: "DELETE",
-    }).then((res) => res.json());
+    }).then((res) => bookId);
   }
 );
 
@@ -40,21 +40,32 @@ const bookSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getBooks.fulfilled, (state, action) => {
-      // Add user to the state array
-      state.status = "success";
-      state.books = action.payload;
+      console.log("getBooks", action.payload);
+      return {
+        ...state,
+        status: "success",
+        books: action.payload,
+      };
     });
 
     builder.addCase(addBook.fulfilled, (state, action) => {
-      // Add user to the state array
-      state.status = "success";
-      state.books.push(action.payload);
+      console.log("addBooks", action.payload);
+      return {
+        ...state,
+        status: "success",
+        books: [...state.books, action.payload],
+      };
     });
 
     builder.addCase(deleteBook.fulfilled, (state, action) => {
-      // Add user to the state array
-      state.status = "success";
-      state.books.filter((book) => book._id === action.payload._id);
+      console.log("addBooks", action.payload);
+      return {
+        ...state,
+        status: "success",
+        books: state.books.filter((book) => book._id !== action.payload),
+      };
+      //   state.status = "success";
+      //   state.books = state.books.filter((book) => book._id !== action.payload);
     });
   },
 });

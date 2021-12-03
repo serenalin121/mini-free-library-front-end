@@ -22,7 +22,7 @@ export const deleteLibrary = createAsyncThunk(
   async ({ id }) => {
     return await fetch(baseUrl + "/" + id, {
       method: "DELETE",
-    }).then((res) => res.json());
+    }).then((res) => id);
   }
 );
 
@@ -36,8 +36,13 @@ const librarySlice = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(getLibraries.fulfilled, (state, action) => {
       // Add user to the state array
-      state.status = "success";
-      state.libraries = action.payload;
+      // state.status = "success";
+      // state.libraries = action.payload;
+      return {
+        ...state,
+        status: "success",
+        libraries: action.payload,
+      };
     });
 
     builder.addCase(createLibrary.fulfilled, (state, action) => {
@@ -49,7 +54,9 @@ const librarySlice = createSlice({
     builder.addCase(deleteLibrary.fulfilled, (state, action) => {
       // Add user to the state array
       state.status = "success";
-      state.libraries.filter((lib) => lib._id === action.payload._id);
+      state.libraries = state.libraries.filter(
+        (lib) => lib._id !== action.payload
+      );
     });
   },
 });
