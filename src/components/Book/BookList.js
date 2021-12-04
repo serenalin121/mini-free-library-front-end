@@ -31,11 +31,21 @@ const BookList = (props) => {
         {props.books.map((book, i) => {
           return (
             <Grid item xs={4} sm={3} md={2} key={i}>
-              <Card>
+              <Card
+                style={{
+                  height: "475px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <CardMedia
                   component="img"
                   alt={book.name}
-                  rowHeight={200}
+                  style={{
+                    height: "300px",
+                    objectFit: "contain",
+                  }}
                   image={`https://covers.openlibrary.org/b/isbn/${book.ISBN}-M.jpg`}
                 />
                 <CardContent>
