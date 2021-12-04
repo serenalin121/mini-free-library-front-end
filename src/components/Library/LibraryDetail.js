@@ -22,6 +22,7 @@ const LibraryDetail = () => {
       <h1>Library Detail</h1>
       <h2>Location: {library?.location}</h2>
       <button onClick={deleteLibraryHandler}>Delete</button>
+      <h3>Add Book: </h3>
       <BookNewForm libId={params.libraryId} />
       <h3>Book List: </h3>
       <BookContainer libId={params.libraryId} />

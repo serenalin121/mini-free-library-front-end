@@ -1,6 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBook } from "../../store/bookSlice";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const BookNewForm = (props) => {
   const [isbn, setIsbn] = useState("");
@@ -24,14 +28,28 @@ const BookNewForm = (props) => {
   };
 
   return (
-    <Fragment>
-      <h3>Add a new book </h3>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="isbn">ISBN</label>
-        <input type="text" onChange={ISBNChangeHandler} value={isbn} />
-        <button type="submit">Add New Book</button>
-      </form>
-    </Fragment>
+    <Box
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={submitHandler}
+    >
+      <div>
+        <TextField
+          required
+          id="outlined-required"
+          label="ISBN #"
+          onChange={ISBNChangeHandler}
+          value={isbn}
+        />
+      </div>
+      <Button type="submit" variant="outlined">
+        Add New Book
+      </Button>
+    </Box>
   );
 };
 
