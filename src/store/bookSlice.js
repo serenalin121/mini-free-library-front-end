@@ -16,7 +16,7 @@ export const addBook = createAsyncThunk(
         ISBN,
         locationID: libId,
       }),
-    }).then((res) => res.json());
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
   }
 );
 

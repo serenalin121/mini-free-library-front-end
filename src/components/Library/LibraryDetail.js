@@ -20,7 +20,7 @@ const LibraryDetail = () => {
   return (
     <section>
       <h1>Library Detail</h1>
-      <h2>Location: {library.location}</h2>
+      <h2>Location: {library?.location}</h2>
       <button onClick={deleteLibraryHandler}>Delete</button>
       <BookNewForm libId={params.libraryId} />
       <h3>Book List: </h3>
