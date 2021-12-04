@@ -2,6 +2,15 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteBook } from "../../store/bookSlice";
 
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+
 const BookList = (props) => {
   const dispatch = useDispatch();
 
@@ -10,20 +19,45 @@ const BookList = (props) => {
   };
 
   return (
-    <ul>
-      {props.books.map((book, i) => {
-        return (
-          <li key={i}>
-            {book.name}
-            <img
-              src={`https://covers.openlibrary.org/b/isbn/${book.ISBN}-M.jpg`}
-              alt={book.name}
-            />
-            <button onClick={() => deleteBookHandler(book._id)}>Delete</button>
-          </li>
-        );
-      })}
-    </ul>
+    <Box sx={{ mx: "auto", width: "80%" }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        {props.books.map((book, i) => {
+          return (
+            <Grid item xs={4} sm={3} md={2} key={i}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  alt={book.name}
+                  rowHeight={200}
+                  image={`https://covers.openlibrary.org/b/isbn/${book.ISBN}-M.jpg`}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {book.name}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    onClick={() => deleteBookHandler(book._id)}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
   );
 };
 

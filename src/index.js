@@ -4,12 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 
 import store from "./store/index";
 import "mapbox-gl/dist/mapbox-gl.css";
+import CssBaseline from "@mui/material/CssBaseline";
 import "./index.css";
 import App from "./App";
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <CssBaseline />
       <App />
     </BrowserRouter>
   </Provider>,
