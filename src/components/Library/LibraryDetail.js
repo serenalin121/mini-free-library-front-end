@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteLibrary } from "../../store/librarySlice";
 import BookContainer from "../Book/BookContainer";
+import BookNewForm from "../Book/BookNewForm";
 
 const LibraryDetail = () => {
   const params = useParams();
@@ -21,6 +22,7 @@ const LibraryDetail = () => {
       <h1>Library Detail</h1>
       <h2>Location: {library.location}</h2>
       <button onClick={deleteLibraryHandler}>Delete</button>
+      <BookNewForm libId={params.libraryId} />
       <h3>Book List: </h3>
       <BookContainer libId={params.libraryId} />
     </section>

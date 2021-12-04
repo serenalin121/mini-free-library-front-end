@@ -8,15 +8,13 @@ export const getBooks = createAsyncThunk("books/get", async ({ libId }) => {
 
 export const addBook = createAsyncThunk(
   "books/post",
-  async ({ libId, name, ISBN }) => {
+  async ({ libId, ISBN }) => {
     return await fetch(baseUrl + "/" + libId, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name,
         ISBN,
         locationID: libId,
-        locationType: "Library",
       }),
     }).then((res) => res.json());
   }
