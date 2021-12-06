@@ -16,8 +16,8 @@ const BookNewForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(props.libId);
-    // console.log(isbn);
+    console.log(props.libId);
+    console.log(isbn);
     dispatch(
       addBook({
         libId: props.libId,

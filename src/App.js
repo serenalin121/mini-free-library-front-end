@@ -5,6 +5,7 @@ import { getLibraries } from "./store/librarySlice";
 import MainHeader from "./components/MainHeader";
 import LibraryDetail from "./components/Library/LibraryDetail";
 import { useDispatch } from "react-redux";
+import CustomizedSnackbars from "./components/UI/Snackbar";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
     <div className="App">
       <MainHeader />
       <main>
+        <CustomizedSnackbars />
         <Routes>
           <Route
             path="/"
