@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import LibraryContainer from "./components/Library/LibraryContainer";
+import LibraryNewForm from "./components/Library/LibraryNewForm";
 import { getLibraries } from "./store/librarySlice";
 import MainHeader from "./components/MainHeader";
 import LibraryDetail from "./components/Library/LibraryDetail";
@@ -22,11 +23,8 @@ function App() {
       <main>
         <CustomizedSnackbars />
         <Routes>
-          <Route
-            path="/"
-            element={<h1>📚 Welcome to Mini Free Library! 📚</h1>}
-          />
-          <Route path="/library" element={<LibraryContainer />} />
+          <Route path="/" element={<LibraryContainer />} />
+          <Route path="/library" element={<LibraryNewForm />} />
           <Route path="/library/:libraryId/" element={<LibraryDetail />} />
         </Routes>
       </main>

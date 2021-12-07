@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -17,6 +19,10 @@ const LibraryNewForm = () => {
   const [zoom, setZoom] = useState(9);
   let result = useRef();
 
+  const navigate = useNavigate();
+  const libraries = useSelector((state) => state.library.libraries);
+  const newLibrary = libraries[libraries.length - 1];
+
   const createLibraryHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -26,6 +32,7 @@ const LibraryNewForm = () => {
         location: result.current.place_name,
       })
     );
+    navigate(`/library/${newLibrary._id}`);
   };
 
   useEffect(() => {
