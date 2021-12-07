@@ -20,7 +20,7 @@ const MainHeader = () => {
               className={(navData) => (navData.isActive ? classes.active : " ")}
               to="/library"
             >
-              Libraries
+              Add library
             </NavLink>
           </li>
         </ul>

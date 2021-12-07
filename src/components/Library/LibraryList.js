@@ -29,10 +29,21 @@ const LibraryList = (props) => {
     });
   });
 
+  const createMarker = (library) => {
+    new mapboxgl.Marker()
+      .setLngLat([library.longitude, library.latitude])
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(`<h3>${library.location}</h3>`)
+      )
+      .addTo(map.current);
+  };
+
   return (
     <>
       <ul>
         {props.libraries.map((library, i) => {
+          console.log(library);
           return (
             <li key={i}>
               <Link to={`/library/${library._id}`}>{library.location} </Link>
@@ -42,6 +53,9 @@ const LibraryList = (props) => {
       </ul>
       <div>
         <div ref={mapContainer} className="map-container" />
+        {props.libraries.map((library, i) => {
+          return createMarker(library);
+        })}
       </div>
     </>
   );
