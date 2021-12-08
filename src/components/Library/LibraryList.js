@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+
 const LibraryList = (props) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-103.5917);
   const [lat, setLat] = useState(40.6699);
   const [zoom, setZoom] = useState(3);
+  const popupRef = useRef();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -34,6 +36,7 @@ const LibraryList = (props) => {
       .setLngLat([library.longitude, library.latitude])
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }) // add popups
+          // .setDOMContent(popupRef.current)
           .setHTML(`<h3>${library.location}</h3>`)
       )
       .addTo(map.current);
@@ -43,7 +46,6 @@ const LibraryList = (props) => {
     <>
       <ul>
         {props.libraries.map((library, i) => {
-          console.log(library);
           return (
             <li key={i}>
               <Link to={`/library/${library._id}`}>{library.location} </Link>
@@ -54,7 +56,19 @@ const LibraryList = (props) => {
       <div>
         <div ref={mapContainer} className="map-container" />
         {props.libraries.map((library, i) => {
-          return createMarker(library);
+          return (
+            createMarker(library),
+            (
+              <div key={i} style={{ display: "none" }}>
+                <div ref={popupRef}>
+                  <h3>{library.location}</h3>
+                  {/* <form onSubmit={createLibraryHandler}>
+                  <button type="submit">Add Library</button>
+                </form> */}
+                </div>
+              </div>
+            )
+          );
         })}
       </div>
     </>

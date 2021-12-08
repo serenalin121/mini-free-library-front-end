@@ -18,6 +18,10 @@ const BookList = (props) => {
     dispatch(deleteBook({ bookId: id }));
   };
 
+  const checkoutBookHandler = () => {
+    console.log("click!");
+  };
+
   return (
     <Box sx={{ mx: "auto", width: "80%" }}>
       <Grid
@@ -60,6 +64,13 @@ const BookList = (props) => {
                     color="error"
                   >
                     Delete
+                  </Button>
+                  <Button
+                    onClick={() => checkoutBookHandler(book._id)}
+                    variant="outlined"
+                    color="info"
+                  >
+                    Checkout
                   </Button>
                 </CardActions>
               </Card>

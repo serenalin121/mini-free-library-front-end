@@ -23,6 +23,14 @@ const MainHeader = () => {
               Add library
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className={(navData) => (navData.isActive ? classes.active : " ")}
+              to="/cart"
+            >
+              My Cart
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
