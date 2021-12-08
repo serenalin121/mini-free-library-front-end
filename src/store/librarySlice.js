@@ -29,6 +29,8 @@ export const deleteLibrary = createAsyncThunk(
 const librarySlice = createSlice({
   name: "library",
   initialState: {
+    action: "",
+    status: "",
     libraries: [],
   },
   reducers: {},
@@ -47,6 +49,7 @@ const librarySlice = createSlice({
 
     builder.addCase(createLibrary.fulfilled, (state, action) => {
       // Add user to the state array
+      state.action = "add";
       state.status = "success";
       state.libraries.push(action.payload);
     });

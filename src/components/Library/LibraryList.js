@@ -11,6 +11,8 @@ const LibraryList = (props) => {
   const [lat, setLat] = useState(40.6699);
   const [zoom, setZoom] = useState(3);
   const popupRef = useRef();
+  const selectedLibraryLocation = useRef();
+  const selectedLibraryId = useRef();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -32,14 +34,24 @@ const LibraryList = (props) => {
   });
 
   const createMarker = (library) => {
-    new mapboxgl.Marker()
+    const marker = new mapboxgl.Marker()
       .setLngLat([library.longitude, library.latitude])
-      .setPopup(
-        new mapboxgl.Popup({ offset: 25 }) // add popups
-          // .setDOMContent(popupRef.current)
-          .setHTML(`<h3>${library.location}</h3>`)
-      )
+      // .setPopup(
+      // new mapboxgl.Popup({ offset: 25 }) // add popups
+      // .setDOMContent(popupRef.current)
+      // .setHTML(`<h3>${library.location}</h3>`)
+      // )
       .addTo(map.current);
+
+    marker.getElement().addEventListener("click", () => {
+      selectedLibraryLocation.current = library.location;
+      selectedLibraryId.current = library._id;
+
+      const popup = new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setDOMContent(popupRef.current);
+
+      marker.setPopup(popup);
+    });
   };
 
   return (
@@ -55,21 +67,18 @@ const LibraryList = (props) => {
       </ul>
       <div>
         <div ref={mapContainer} className="map-container" />
-        {props.libraries.map((library, i) => {
-          return (
-            createMarker(library),
-            (
-              <div key={i} style={{ display: "none" }}>
-                <div ref={popupRef}>
-                  <h3>{library.location}</h3>
-                  {/* <form onSubmit={createLibraryHandler}>
-                  <button type="submit">Add Library</button>
-                </form> */}
-                </div>
-              </div>
-            )
-          );
-        })}
+        {map?.current &&
+          props.libraries.map((library, i) => {
+            return createMarker(library);
+          })}
+        <div style={{ display: "none" }}>
+          <div ref={popupRef}>
+            <h3>{selectedLibraryLocation.current}</h3>
+            <Link to={`/library/${selectedLibraryId.current}`}>
+              Check Library{" "}
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );

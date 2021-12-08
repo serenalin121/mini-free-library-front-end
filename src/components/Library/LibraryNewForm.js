@@ -21,7 +21,7 @@ const LibraryNewForm = () => {
 
   const navigate = useNavigate();
   const libraries = useSelector((state) => state.library.libraries);
-  const newLibrary = libraries[libraries.length - 1];
+  const librariesState = useSelector((state) => state.library.action);
 
   const createLibraryHandler = (e) => {
     e.preventDefault();
@@ -32,8 +32,13 @@ const LibraryNewForm = () => {
         location: result.current.place_name,
       })
     );
-    navigate(`/library/${newLibrary._id}`);
   };
+
+  useEffect(() => {
+    if (librariesState === "add") {
+      navigate(`/library/${libraries[libraries.length - 1]._id}`);
+    }
+  }, [librariesState, navigate, libraries]);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
