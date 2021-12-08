@@ -29,10 +29,25 @@ export const deleteBook = createAsyncThunk(
   }
 );
 
+export const checkoutBook = createAsyncThunk(
+  "checkout/post",
+  async ({ userId, bookId }) => {
+    return await fetch(baseUrl + "/checkout/" + bookId, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // locationID: userId,
+        userID: "88888c73343ff30036e5e28e",
+      }),
+    }).then((res) => bookId);
+  }
+);
+
 const bookSlice = createSlice({
   name: "book",
   initialState: {
     books: [],
+    checkout: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -57,7 +72,7 @@ const bookSlice = createSlice({
     });
 
     builder.addCase(deleteBook.fulfilled, (state, action) => {
-      console.log("addBooks", action.payload);
+      console.log("deleteBooks", action.payload);
       return {
         ...state,
         status: "success",
@@ -65,6 +80,20 @@ const bookSlice = createSlice({
       };
       //   state.status = "success";
       //   state.books = state.books.filter((book) => book._id !== action.payload);
+    });
+
+    builder.addCase(checkoutBook.fulfilled, (state, action) => {
+      console.log("checkoutBooks", action.payload);
+
+      return {
+        ...state,
+        status: "success",
+        books: state.books.filter((book) => book._id !== action.payload),
+        checkout: [
+          ...state.checkout,
+          state.books.filter((book) => book._id === action.payload),
+        ],
+      };
     });
   },
 });

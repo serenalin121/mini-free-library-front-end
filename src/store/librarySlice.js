@@ -57,6 +57,7 @@ const librarySlice = createSlice({
     builder.addCase(deleteLibrary.fulfilled, (state, action) => {
       // Add user to the state array
       state.status = "success";
+      state.action = "delete";
       state.libraries = state.libraries.filter(
         (lib) => lib._id !== action.payload
       );

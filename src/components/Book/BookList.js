@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteBook } from "../../store/bookSlice";
+import { checkoutBook } from "../../store/bookSlice";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -18,8 +19,8 @@ const BookList = (props) => {
     dispatch(deleteBook({ bookId: id }));
   };
 
-  const checkoutBookHandler = () => {
-    console.log("click!");
+  const checkoutBookHandler = (id) => {
+    dispatch(checkoutBook({ bookId: id }));
   };
 
   return (
