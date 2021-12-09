@@ -7,9 +7,9 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const LibraryList = (props) => {
   const mapContainer = useRef(null);
   const [map, setMap] = useState(null);
-  const [lng, setLng] = useState(-103.5917);
-  const [lat, setLat] = useState(40.6699);
-  const [zoom, setZoom] = useState(3);
+  const [lng, setLng] = useState(-95.6917);
+  const [lat, setLat] = useState(38.6699);
+  const [zoom, setZoom] = useState(4);
   const popupRef = useRef();
   const [selectedLibraryLocation, setSelectedLibraryLocation] = useState();
   const [selectedLibraryId, setSelectedLibraryId] = useState();
@@ -94,7 +94,7 @@ const LibraryList = (props) => {
 
   return (
     <>
-      <ul>
+      {/* <ul>
         {props.libraries.map((library, i) => {
           return (
             <li key={i}>
@@ -102,7 +102,7 @@ const LibraryList = (props) => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
       <div>
         <div ref={mapContainer} className="map-container" />
         {/* {map &&

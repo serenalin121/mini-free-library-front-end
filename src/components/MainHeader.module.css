@@ -1,6 +1,8 @@
 .headerButton a {
   color: white;
   text-decoration: none;
+  font-size: large;
+  margin-left: 20px;
 }
 
 .headerSmall a {

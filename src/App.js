@@ -32,6 +32,10 @@ function App() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </main>
+      <p className="copyright">
+        {" "}
+        © Copyright 2021 | Designed and Coded by Serena Lin{" "}
+      </p>
     </div>
   );
 }
