@@ -22,19 +22,20 @@ const LibraryDetail = () => {
 
   return (
     <section>
-      <h1>Library Detail</h1>
-      <h2>Location: {library?.location}</h2>
-      <Button
-        variant="outlined"
-        startIcon={<DeleteIcon />}
-        onClick={deleteLibraryHandler}
-        color="error"
-      >
-        Delete
-      </Button>
-      <h3>Add Book: </h3>
+      <h1>
+        This library is located at: {library?.location}
+        {"   "}
+        <Button
+          variant="outlined"
+          startIcon={<DeleteIcon />}
+          onClick={deleteLibraryHandler}
+          color="error"
+        >
+          Delete
+        </Button>
+      </h1>
+
       <BookNewForm libId={params.libraryId} />
-      <h3>Book List: </h3>
       <BookContainer libId={params.libraryId} />
     </section>
   );

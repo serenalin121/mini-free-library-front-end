@@ -35,7 +35,7 @@ const BookList = (props) => {
       >
         {props.books.map((book, i) => {
           return (
-            <Grid item xs={4} sm={3} md={2} key={i}>
+            <Grid item xs={6} sm={4} md={2} key={i}>
               <Card
                 style={{
                   height: "475px",

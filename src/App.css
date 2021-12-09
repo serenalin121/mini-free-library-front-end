@@ -37,8 +37,26 @@
   }
 }
 
+.mainContainer {
+  height: calc(100vh - 145px);
+  overflow-y: auto;
+}
+
+.copyright {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  font-size: small;
+  color: rgba(0, 34, 67, 0.76);
+}
+
 .logo-image {
   width: 100px;
   height: 100px;
   margin: 5px;
+}
+
+.addBookHeader {
+  margin: 1px;
 }

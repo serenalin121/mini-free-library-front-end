@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <MainHeader />
-      <main>
+      <main className="mainContainer">
         <CustomizedSnackbars />
         <Routes>
           <Route path="/" element={<LibraryContainer />} />
@@ -33,8 +33,7 @@ function App() {
         </Routes>
       </main>
       <p className="copyright">
-        {" "}
-        © Copyright 2021 | Designed and Coded by Serena Lin{" "}
+        © Copyright 2021 | Designed and Coded by Serena Lin
       </p>
     </div>
   );

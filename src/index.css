@@ -15,12 +15,3 @@ code {
 .map-container {
   height: calc(100vh - 250px);
 }
-
-.copyright {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: block;
-  font-size: small;
-  color: rgba(0, 34, 67, 0.76);
-}

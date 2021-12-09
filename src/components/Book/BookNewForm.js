@@ -37,10 +37,11 @@ const BookNewForm = (props) => {
       autoComplete="off"
       onSubmit={submitHandler}
     >
+      <h3 className="addBookHeader"> Add a new book </h3>
       <div>
         <TextField
           required
-          id="outlined-required"
+          id="outlined-name"
           label="ISBN #"
           onChange={ISBNChangeHandler}
           value={isbn}
