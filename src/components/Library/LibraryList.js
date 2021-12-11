@@ -5,6 +5,7 @@ import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-load
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const LibraryList = (props) => {
+  console.log(props.libraries);
   const mapContainer = useRef(null);
   const [map, setMap] = useState(null);
   const [lng, setLng] = useState(-95.6917);
@@ -95,7 +96,7 @@ const LibraryList = (props) => {
   return (
     <>
       <ul>
-        {props.libraries.map((library, i) => {
+        {props.libraries?.map((library, i) => {
           return (
             <li key={i}>
               <Link to={`/library/${library._id}`}>{library.location} </Link>

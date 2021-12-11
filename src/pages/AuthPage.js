@@ -1,5 +1,7 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,11 +14,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { useDispatch } from "react-redux";
-import { signinUser, signupUser } from "../../store/userSlice";
-import { signinAdmin, signupAdmin } from "../../store/adminSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { signinUser, signupUser } from "../store/userSlice";
+import { signinAdmin, signupAdmin } from "../store/adminSlice";
 
-import image from "../../images/landing-image.jpeg";
+import image from "../images/landing-image.jpeg";
 
 const theme = createTheme();
 
@@ -26,12 +28,12 @@ export default function SignInSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isUser = useSelector((state) => state.user.isUser);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(isExistUser);
-    console.log(isAdmin);
 
     if (isExistUser && !isAdmin) {
       dispatch(signinUser({ email, password }));
@@ -42,7 +44,6 @@ export default function SignInSide() {
     }
 
     if (isExistUser && isAdmin) {
-      console.log("sign in user!");
       dispatch(signinAdmin({ email, password }));
     }
 
@@ -53,6 +54,12 @@ export default function SignInSide() {
     setEmail("");
     setPassword("");
   };
+
+  useEffect(() => {
+    if (isUser) {
+      navigate("/library", { replace: true });
+    }
+  });
 
   const toggleSignInHandler = () => {
     setIsExistUser(!isExistUser);

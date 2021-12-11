@@ -34,7 +34,6 @@ const LibraryDetail = () => {
           Delete
         </Button>
       </h1>
-
       <BookNewForm libId={params.libraryId} />
       <BookContainer libId={params.libraryId} />
     </section>

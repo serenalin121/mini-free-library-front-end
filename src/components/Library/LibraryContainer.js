@@ -10,7 +10,7 @@ const LibraryContainer = () => {
   return (
     <div>
       <h1>All the libraries</h1>
-      <LibraryList libraries={libraries} x={x} />
+      <LibraryList libraries={libraries || []} x={x} />
     </div>
   );
 };

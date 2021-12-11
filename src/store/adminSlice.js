@@ -12,6 +12,7 @@ export const signinAdmin = createAsyncThunk(
         email,
         password,
       }),
+      credentials: "include",
     }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
   }
 );
@@ -26,6 +27,7 @@ export const signupAdmin = createAsyncThunk(
         email,
         password,
       }),
+      credentials: "include",
     }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
   }
 );
@@ -34,6 +36,7 @@ export const signoutAdmin = createAsyncThunk("users/signout", async () => {
   return await fetch(baseUrl + "/signup", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
   }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 });
 

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getLibraries } from "./store/librarySlice";
 
@@ -9,17 +9,20 @@ import MainHeader from "./components/MainHeader";
 import LibraryDetail from "./components/Library/LibraryDetail";
 import LibraryContainer from "./components/Library/LibraryContainer";
 import LibraryNewForm from "./components/Library/LibraryNewForm";
-import Cart from "./components/User/Cart";
-import SignInSide from "./components/User/SignInSide";
+import AuthPage from "./pages/AuthPage";
 
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
+  const isUser = useSelector((state) => state.user.isUser);
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
 
   useEffect(() => {
-    dispatch(getLibraries());
-  }, [dispatch]);
+    if (isUser) {
+      dispatch(getLibraries());
+    }
+  }, [isUser, dispatch]);
 
   return (
     <div className="App">
@@ -27,11 +30,10 @@ function App() {
       <main className="mainContainer">
         <CustomizedSnackbars />
         <Routes>
-          <Route path="/signin" element={<SignInSide />} />
-          {/* <Route path="/" element={<LibraryContainer />} />
-          <Route path="/library" element={<LibraryNewForm />} />
+          <Route path="/" element={<AuthPage />} />
+          <Route path="/library" element={<LibraryContainer />} />
+          <Route path="/newLibrary" element={<LibraryNewForm />} />
           <Route path="/library/:libraryId/" element={<LibraryDetail />} />
-          <Route path="/cart" element={<Cart />} /> */}
         </Routes>
       </main>
       <p className="copyright">

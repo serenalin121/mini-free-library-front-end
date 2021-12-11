@@ -3,7 +3,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const baseUrl = "http://localhost:3003/library";
 
 export const getLibraries = createAsyncThunk("libraries/get", async () => {
-  return await fetch(baseUrl).then((res) => res.json());
+  return await fetch(baseUrl, {
+    credentials: "include",
+  }).then((res) => res.json());
 });
 
 export const createLibrary = createAsyncThunk(
@@ -12,6 +14,7 @@ export const createLibrary = createAsyncThunk(
     return await fetch(baseUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ latitude, longitude, location }),
     }).then((res) => res.json());
   }
@@ -22,6 +25,7 @@ export const deleteLibrary = createAsyncThunk(
   async ({ id }) => {
     return await fetch(baseUrl + "/" + id, {
       method: "DELETE",
+      credentials: "include",
     }).then((res) => id);
   }
 );
@@ -40,6 +44,7 @@ const librarySlice = createSlice({
       // Add user to the state array
       // state.status = "success";
       // state.libraries = action.payload;
+      console.log(action);
       return {
         ...state,
         status: "success",
