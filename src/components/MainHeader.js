@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -47,14 +48,18 @@ const MainHeader = () => {
   const logoutHandler = () => {
     if (isUser) {
       dispatch(signoutUser());
-      navigate("/", { replace: true });
     }
 
     if (isAdmin) {
       dispatch(signoutAdmin());
-      navigate("/", { replace: true });
     }
   };
+
+  useEffect(() => {
+    if (!isUser && !isAdmin) {
+      navigate("/", { replace: true });
+    }
+  }, [isUser, isAdmin, navigate]);
 
   return (
     <AppBar position="static">
@@ -98,11 +103,11 @@ const MainHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem key="homepage" onClick={handleCloseNavMenu}>
+              {/* <MenuItem key="homepage" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" className={classes.headerSmall}>
                   <NavLink to="/"> Homepage</NavLink>
                 </Typography>
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem key="library" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" className={classes.headerSmall}>
@@ -121,14 +126,14 @@ const MainHeader = () => {
             <img src={logo} alt="logo" className="logo-image" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
+            {/* <Button
               key="homepage"
               onClick={handleCloseNavMenu}
               className={classes.headerButton}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               <NavLink to="/"> Homepage</NavLink>
-            </Button>
+            </Button> */}
 
             <Button
               key="library"
