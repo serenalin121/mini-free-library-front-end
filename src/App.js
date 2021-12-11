@@ -10,6 +10,7 @@ import LibraryDetail from "./components/Library/LibraryDetail";
 import LibraryContainer from "./components/Library/LibraryContainer";
 import LibraryNewForm from "./components/Library/LibraryNewForm";
 import Cart from "./components/User/Cart";
+import SignInSide from "./components/User/SignInSide";
 
 import "./App.css";
 
@@ -26,10 +27,11 @@ function App() {
       <main className="mainContainer">
         <CustomizedSnackbars />
         <Routes>
-          <Route path="/" element={<LibraryContainer />} />
+          <Route path="/signin" element={<SignInSide />} />
+          {/* <Route path="/" element={<LibraryContainer />} />
           <Route path="/library" element={<LibraryNewForm />} />
           <Route path="/library/:libraryId/" element={<LibraryDetail />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} /> */}
         </Routes>
       </main>
       <p className="copyright">
