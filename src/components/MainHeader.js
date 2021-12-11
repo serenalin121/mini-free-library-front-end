@@ -170,7 +170,7 @@ const MainHeader = () => {
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" onClick={logoutHandler}>
-                  {isUser ? "Logout" : "Login"}
+                  {isUser || isAdmin ? "Logout" : "Login"}
                 </Typography>
               </MenuItem>
             </Menu>
