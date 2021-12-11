@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useDispatch } from "react-redux";
+import { signinUser, signupUser } from "../../store/userSlice";
+
 import image from "../../images/landing-image.jpeg";
 
 const theme = createTheme();
@@ -19,15 +22,22 @@ const theme = createTheme();
 export default function SignInSide() {
   const [isExistUser, setIsExistUser] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    if (isExistUser && !isAdmin) {
+      dispatch(signinUser({ email, password }));
+    }
+
+    if (!isExistUser && !isAdmin) {
+      dispatch(signupUser({ email, password }));
+    }
+
+    setEmail("");
+    setPassword("");
   };
 
   const toggleSignInHandler = () => {
@@ -36,6 +46,14 @@ export default function SignInSide() {
 
   const toggleAdminHandler = () => {
     setIsAdmin(!isAdmin);
+  };
+
+  const changeEmailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const changePasswordHandler = (e) => {
+    setPassword(e.target.value);
   };
 
   return (
@@ -88,6 +106,8 @@ export default function SignInSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={changeEmailHandler}
+                value={email}
                 autoFocus
               />
               <TextField
@@ -98,6 +118,8 @@ export default function SignInSide() {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
+                onChange={changePasswordHandler}
                 autoComplete="current-password"
               />
 
