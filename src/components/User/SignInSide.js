@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useDispatch } from "react-redux";
 import { signinUser, signupUser } from "../../store/userSlice";
+import { signinAdmin, signupAdmin } from "../../store/adminSlice";
 
 import image from "../../images/landing-image.jpeg";
 
@@ -28,12 +29,25 @@ export default function SignInSide() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log(isExistUser);
+    console.log(isAdmin);
+
     if (isExistUser && !isAdmin) {
       dispatch(signinUser({ email, password }));
     }
 
     if (!isExistUser && !isAdmin) {
       dispatch(signupUser({ email, password }));
+    }
+
+    if (isExistUser && isAdmin) {
+      console.log("sign in user!");
+      dispatch(signinAdmin({ email, password }));
+    }
+
+    if (!isExistUser && isAdmin) {
+      dispatch(signupAdmin({ email, password }));
     }
 
     setEmail("");

@@ -3,6 +3,7 @@ import bookSlice from "./bookSlice";
 import librarySlice from "./librarySlice";
 import snackbarSlice from "./snackbarSlice";
 import userSlice from "./userSlice";
+import adminSlice from "./adminSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     book: bookSlice.reducer,
     snackbar: snackbarSlice.reducer,
     user: userSlice.reducer,
+    admin: adminSlice.reducer,
   },
 });
 
