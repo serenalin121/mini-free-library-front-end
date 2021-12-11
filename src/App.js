@@ -31,8 +31,8 @@ function App() {
         <CustomizedSnackbars />
         <Routes>
           <Route path="/" element={<AuthPage />} />
-          <Route path="/library" element={<LibraryContainer />} />
-          <Route path="/newLibrary" element={<LibraryNewForm />} />
+          {isUser && <Route path="/library" element={<LibraryContainer />} />}
+          {isAdmin && <Route path="/newLibrary" element={<LibraryNewForm />} />}
           <Route path="/library/:libraryId/" element={<LibraryDetail />} />
         </Routes>
       </main>

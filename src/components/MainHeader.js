@@ -1,6 +1,9 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { signoutUser } from "../store/userSlice";
+import { signoutAdmin } from "../store/adminSlice";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,10 +21,9 @@ import logo from "../images/Mini Free Library.png";
 
 import classes from "./MainHeader.module.css";
 
-// const pages = ["Homepage", "Library", "My Books"];
-const settings = ["Logout"];
-
 const MainHeader = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const isUser = useSelector((state) => state.user.isUser);
@@ -40,6 +42,18 @@ const MainHeader = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const logoutHandler = () => {
+    if (isUser) {
+      dispatch(signoutUser());
+      navigate("/", { replace: true });
+    }
+
+    if (isAdmin) {
+      dispatch(signoutAdmin());
+      navigate("/", { replace: true });
+    }
   };
 
   return (
@@ -149,11 +163,11 @@ const MainHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" onClick={logoutHandler}>
+                  {isUser ? "Logout" : "Login"}
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

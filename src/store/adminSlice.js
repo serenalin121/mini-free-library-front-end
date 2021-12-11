@@ -33,7 +33,7 @@ export const signupAdmin = createAsyncThunk(
 );
 
 export const signoutAdmin = createAsyncThunk("users/signout", async () => {
-  return await fetch(baseUrl + "/signup", {
+  return await fetch(baseUrl + "/signout", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
