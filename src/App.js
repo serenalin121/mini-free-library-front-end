@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getLibraries } from "./store/librarySlice";
+import { getLibraries, getMyLibrary } from "./store/librarySlice";
 
 import CustomizedSnackbars from "./components/UI/Snackbar";
 import MainHeader from "./components/MainHeader";
@@ -10,6 +10,7 @@ import LibraryDetail from "./components/Library/LibraryDetail";
 import LibraryContainer from "./components/Library/LibraryContainer";
 import LibraryNewForm from "./components/Library/LibraryNewForm";
 import AuthPage from "./pages/AuthPage";
+import MyLibrary from "./components/Library/MyLibrary";
 
 import "./App.css";
 
@@ -22,7 +23,10 @@ function App() {
     if (isUser) {
       dispatch(getLibraries());
     }
-  }, [isUser, dispatch]);
+    if (isAdmin) {
+      dispatch(getMyLibrary());
+    }
+  }, [isUser, isAdmin, dispatch]);
 
   return (
     <div className="App">
@@ -33,6 +37,7 @@ function App() {
           <Route path="/" element={<AuthPage />} />
           {isUser && <Route path="/library" element={<LibraryContainer />} />}
           {isAdmin && <Route path="/newLibrary" element={<LibraryNewForm />} />}
+          {isAdmin && <Route path="/myLibrary" element={<MyLibrary />} />}
           <Route path="/library/:libraryId/" element={<LibraryDetail />} />
         </Routes>
       </main>

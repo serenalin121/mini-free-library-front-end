@@ -103,16 +103,16 @@ const MainHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {/* <MenuItem key="homepage" onClick={handleCloseNavMenu}>
+              <MenuItem key="homepage" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" className={classes.headerSmall}>
-                  <NavLink to="/"> Homepage</NavLink>
+                  {isAdmin && <NavLink to="/myLibrary"> My Library</NavLink>}
                 </Typography>
-              </MenuItem> */}
+              </MenuItem>
 
               <MenuItem key="library" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" className={classes.headerSmall}>
                   {isUser && <NavLink to="/library">All Libraries</NavLink>}
-                  {isAdmin && <NavLink to="/newlibrary">Add Library</NavLink>}
+                  {isAdmin && <NavLink to="/newLibrary">Add Library</NavLink>}
                 </Typography>
               </MenuItem>
             </Menu>
@@ -126,14 +126,14 @@ const MainHeader = () => {
             <img src={logo} alt="logo" className="logo-image" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* <Button
+            <Button
               key="homepage"
               onClick={handleCloseNavMenu}
               className={classes.headerButton}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              <NavLink to="/"> Homepage</NavLink>
-            </Button> */}
+              {isAdmin && <NavLink to="/myLibrary"> My Library</NavLink>}
+            </Button>
 
             <Button
               key="library"
@@ -142,7 +142,7 @@ const MainHeader = () => {
               sx={{ my: 2, color: "white", display: "block" }}
             >
               {isUser && <NavLink to="/library">All Libraries</NavLink>}
-              {isAdmin && <NavLink to="/newlibrary">Add Library</NavLink>}
+              {isAdmin && <NavLink to="/newLibrary">Add Library</NavLink>}
             </Button>
           </Box>
 

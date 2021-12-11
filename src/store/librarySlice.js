@@ -8,6 +8,12 @@ export const getLibraries = createAsyncThunk("libraries/get", async () => {
   }).then((res) => res.json());
 });
 
+export const getMyLibrary = createAsyncThunk("mylibrary/get", async () => {
+  return await fetch(baseUrl + "/myLibrary", {
+    credentials: "include",
+  }).then((res) => res.json());
+});
+
 export const createLibrary = createAsyncThunk(
   "library/post",
   async ({ latitude, longitude, location }) => {
@@ -36,6 +42,7 @@ const librarySlice = createSlice({
     action: "",
     status: "",
     libraries: [],
+    myLibrary: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -49,6 +56,18 @@ const librarySlice = createSlice({
         ...state,
         status: "success",
         libraries: action.payload,
+      };
+    });
+
+    builder.addCase(getMyLibrary.fulfilled, (state, action) => {
+      // Add user to the state array
+      // state.status = "success";
+      // state.libraries = action.payload;
+      console.log(action);
+      return {
+        ...state,
+        status: "success",
+        myLibrary: action.payload,
       };
     });
 

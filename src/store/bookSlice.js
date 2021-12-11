@@ -14,6 +14,7 @@ export const addBook = createAsyncThunk(
     return await fetch(baseUrl + "/" + libId, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
         ISBN,
         locationID: libId,
@@ -27,6 +28,7 @@ export const deleteBook = createAsyncThunk(
   async ({ bookId }) => {
     return await fetch(baseUrl + "/" + bookId, {
       method: "DELETE",
+      credentials: "include",
     }).then((res) => bookId);
   }
 );
