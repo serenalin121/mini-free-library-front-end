@@ -24,30 +24,31 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const [isExistUser, setIsExistUser] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdminLogin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isUser = useSelector((state) => state.user.isUser);
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (isExistUser && !isAdmin) {
+    if (isExistUser && !isAdminLogin) {
       dispatch(signinUser({ email, password }));
     }
 
-    if (!isExistUser && !isAdmin) {
+    if (!isExistUser && !isAdminLogin) {
       dispatch(signupUser({ email, password }));
     }
 
-    if (isExistUser && isAdmin) {
+    if (isExistUser && isAdminLogin) {
       dispatch(signinAdmin({ email, password }));
     }
 
-    if (!isExistUser && isAdmin) {
+    if (!isExistUser && isAdminLogin) {
       dispatch(signupAdmin({ email, password }));
     }
 
@@ -59,6 +60,10 @@ export default function SignInSide() {
     if (isUser) {
       navigate("/library", { replace: true });
     }
+
+    if (isAdmin) {
+      navigate("/newLibrary", { replace: true });
+    }
   });
 
   const toggleSignInHandler = () => {
@@ -66,7 +71,7 @@ export default function SignInSide() {
   };
 
   const toggleAdminHandler = () => {
-    setIsAdmin(!isAdmin);
+    setIsAdmin(!isAdminLogin);
   };
 
   const changeEmailHandler = (e) => {
@@ -155,7 +160,9 @@ export default function SignInSide() {
               <Grid container>
                 <Grid item xs={6}>
                   <Link href="#" variant="body2" onClick={toggleAdminHandler}>
-                    {isAdmin ? "Want to Borrow a Book?" : "A Library Owner?"}
+                    {isAdminLogin
+                      ? "Want to Borrow a Book?"
+                      : "A Library Owner?"}
                   </Link>
                 </Grid>
                 <Grid item xs={6}>

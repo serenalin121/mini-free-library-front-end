@@ -54,7 +54,7 @@ const adminSlice = createSlice({
       return {
         ...state,
         status: "success",
-        isUser: true,
+        isAdmin: true,
         userInfo: [action.payload],
       };
     });
@@ -65,7 +65,7 @@ const adminSlice = createSlice({
       return {
         ...state,
         status: "success",
-        isUser: true,
+        isAdmin: true,
         userInfo: [action.payload],
       };
     });
@@ -76,7 +76,7 @@ const adminSlice = createSlice({
       return {
         ...state,
         status: "success",
-        isUser: false,
+        isAdmin: false,
         userInfo: [],
       };
     });
