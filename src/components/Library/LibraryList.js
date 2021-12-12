@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import Button from "@mui/material/Button";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -14,7 +15,6 @@ const LibraryList = (props) => {
   const popupRef = useRef();
   const [selectedLibraryLocation, setSelectedLibraryLocation] = useState();
   const [selectedLibraryId, setSelectedLibraryId] = useState();
-  // const [markers, setMarkers] = useState([]);
   const markers = useRef([]);
 
   useEffect(() => {
@@ -42,11 +42,6 @@ const LibraryList = (props) => {
     (library) => {
       const marker = new mapboxgl.Marker()
         .setLngLat([library.longitude, library.latitude])
-        // .setPopup(
-        // new mapboxgl.Popup({ offset: 25 }) // add popups
-        // .setDOMContent(popupRef.current)
-        // .setHTML(`<h3>${library.location}</h3>`)
-        // )
         .addTo(map);
 
       marker.getElement().addEventListener("click", () => {
@@ -72,27 +67,6 @@ const LibraryList = (props) => {
     markers.current = props.libraries.map((library) => createMarker(library));
   }, [props.libraries, createMarker, map]);
 
-  // const createMarker = (library) => {
-  //   const marker = new mapboxgl.Marker()
-  //     .setLngLat([library.longitude, library.latitude])
-  //     // .setPopup(
-  //     // new mapboxgl.Popup({ offset: 25 }) // add popups
-  //     // .setDOMContent(popupRef.current)
-  //     // .setHTML(`<h3>${library.location}</h3>`)
-  //     // )
-  //     .addTo(map);
-
-  //   marker.getElement().addEventListener("click", () => {
-  //     setSelectedLibraryLocation(library.location);
-  //     setSelectedLibraryId(library._id);
-
-  //     const popup = new mapboxgl.Popup({ offset: 25 }) // add popups
-  //       .setDOMContent(popupRef.current);
-
-  //     marker.setPopup(popup);
-  //   });
-  // };
-
   return (
     <>
       <ul>
@@ -106,14 +80,13 @@ const LibraryList = (props) => {
       </ul>
       <div>
         <div ref={mapContainer} className="map-container" />
-        {/* {map &&
-          props.libraries.map((library, i) => {
-            return createMarker(library);
-          })} */}
+
         <div style={{ display: "none" }}>
           <div ref={popupRef}>
             <h3>{selectedLibraryLocation}</h3>
-            <Link to={`/library/${selectedLibraryId}`}>Check Library </Link>
+            <Button variant="outlined" className="library-list-button">
+              <Link to={`/library/${selectedLibraryId}`}>Check Library </Link>
+            </Button>
           </div>
         </div>
       </div>

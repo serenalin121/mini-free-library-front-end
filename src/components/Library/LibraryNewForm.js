@@ -7,6 +7,8 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { useDispatch } from "react-redux";
 import { createLibrary } from "../../store/librarySlice";
 
+import Button from "@mui/material/Button";
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const LibraryNewForm = () => {
@@ -94,7 +96,9 @@ const LibraryNewForm = () => {
         <div ref={popupRef}>
           <h3>{result?.current?.place_name}</h3>
           <form onSubmit={createLibraryHandler}>
-            <button type="submit">Add Library</button>
+            <Button variant="outlined" type="submit">
+              Add Library
+            </Button>
           </form>
         </div>
       </div>

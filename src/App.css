@@ -60,3 +60,19 @@
 .addBookHeader {
   margin: 1px;
 }
+
+.my-library-ul {
+  list-style-type: none;
+}
+
+.my-library-ul a,
+.library-list-button a {
+  text-decoration: none;
+  color: #7d6b44;
+}
+
+.my-library-ul a:hover,
+.library-list-button a:hover {
+  text-decoration: none;
+  color: #7d6b44;
+}
