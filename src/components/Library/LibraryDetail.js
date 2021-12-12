@@ -14,6 +14,8 @@ const LibraryDetail = () => {
 
   const libraries = useSelector((state) => state.library.libraries);
   const library = libraries.find((lib) => lib._id === params.libraryId);
+  const isUser = useSelector((state) => state.user.isUser);
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
 
   const deleteLibraryHandler = () => {
     dispatch(deleteLibrary({ id: params.libraryId }));
@@ -25,16 +27,18 @@ const LibraryDetail = () => {
       <h1>
         This library is located at: {library?.location}
         {"   "}
-        <Button
-          variant="outlined"
-          startIcon={<DeleteIcon />}
-          onClick={deleteLibraryHandler}
-          color="error"
-        >
-          Delete
-        </Button>
+        {isAdmin && (
+          <Button
+            variant="outlined"
+            startIcon={<DeleteIcon />}
+            onClick={deleteLibraryHandler}
+            color="error"
+          >
+            Delete
+          </Button>
+        )}
       </h1>
-      <BookNewForm libId={params.libraryId} />
+      {isAdmin && <BookNewForm libId={params.libraryId} />}
       <BookContainer libId={params.libraryId} />
     </section>
   );

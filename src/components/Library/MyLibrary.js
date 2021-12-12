@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const MyLibrary = () => {
-  const mylibrary = useSelector((state) => state.library.myLibrary);
+  const mylibrary = useSelector((state) => state.library.libraries);
   console.log(mylibrary);
   return (
     <>

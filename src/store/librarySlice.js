@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { signoutAdmin } from "./adminSlice";
 
 const baseUrl = "http://localhost:3003/library";
 
@@ -42,7 +43,6 @@ const librarySlice = createSlice({
     action: "",
     status: "",
     libraries: [],
-    myLibrary: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -67,7 +67,7 @@ const librarySlice = createSlice({
       return {
         ...state,
         status: "success",
-        myLibrary: action.payload,
+        libraries: action.payload,
       };
     });
 
@@ -85,6 +85,14 @@ const librarySlice = createSlice({
       state.libraries = state.libraries.filter(
         (lib) => lib._id !== action.payload
       );
+    });
+
+    builder.addCase(signoutAdmin.fulfilled, (state, action) => {
+      // Add user to the state array
+      return {
+        ...state,
+        myLibrary: [],
+      };
     });
   },
 });

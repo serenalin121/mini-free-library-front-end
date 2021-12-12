@@ -62,7 +62,7 @@ export default function SignInSide() {
     }
 
     if (isAdmin) {
-      navigate("/newLibrary", { replace: true });
+      navigate("/myLibrary", { replace: true });
     }
   });
 

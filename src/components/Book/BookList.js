@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteBook } from "../../store/bookSlice";
 import { checkoutBook } from "../../store/bookSlice";
 
@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 
 const BookList = (props) => {
   const dispatch = useDispatch();
+  const isUser = useSelector((state) => state.user.isUser);
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
 
   const deleteBookHandler = (id) => {
     dispatch(deleteBook({ bookId: id }));
@@ -59,20 +61,24 @@ const BookList = (props) => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button
-                    onClick={() => deleteBookHandler(book._id)}
-                    variant="outlined"
-                    color="error"
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    onClick={() => checkoutBookHandler(book._id)}
-                    variant="outlined"
-                    color="info"
-                  >
-                    Checkout
-                  </Button>
+                  {isAdmin && (
+                    <Button
+                      onClick={() => deleteBookHandler(book._id)}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Delete
+                    </Button>
+                  )}
+                  {isUser && (
+                    <Button
+                      onClick={() => checkoutBookHandler(book._id)}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Checkout
+                    </Button>
+                  )}
                 </CardActions>
               </Card>
             </Grid>
