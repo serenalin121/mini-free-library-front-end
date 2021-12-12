@@ -14,7 +14,6 @@ const LibraryDetail = () => {
 
   const libraries = useSelector((state) => state.library.libraries);
   const library = libraries.find((lib) => lib._id === params.libraryId);
-  const isUser = useSelector((state) => state.user.isUser);
   const isAdmin = useSelector((state) => state.admin.isAdmin);
 
   const deleteLibraryHandler = () => {
