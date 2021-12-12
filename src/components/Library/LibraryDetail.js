@@ -6,6 +6,7 @@ import BookNewForm from "../Book/BookNewForm";
 
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { LocationOn } from "@mui/icons-material";
 
 const LibraryDetail = () => {
   const params = useParams();
@@ -24,8 +25,7 @@ const LibraryDetail = () => {
   return (
     <section>
       <h1>
-        This library is located at: {library?.location}
-        {"   "}
+        <LocationOn /> {library?.location}
         {isAdmin && (
           <Button
             variant="outlined"

@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getBooks } from "../../store/bookSlice";
 import React from "react";
 import BookList from "./BookList";
-// import BookNewForm from "./BookNewForm";
+
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../../theme";
 
 const BookContainer = (props) => {
   const dispatch = useDispatch();
@@ -15,10 +17,11 @@ const BookContainer = (props) => {
   }, [dispatch, props.libId]);
 
   return (
-    <div>
-      <h1>All Books</h1>
+    <ThemeProvider theme={theme}>
+      <hr />
+      <h2 style={{ color: "#7d6b44" }}>All Books</h2>
       <BookList books={books} />
-    </div>
+    </ThemeProvider>
   );
 };
 

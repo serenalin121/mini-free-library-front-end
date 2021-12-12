@@ -12,15 +12,14 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 import { useDispatch, useSelector } from "react-redux";
 import { signinUser, signupUser } from "../store/userSlice";
 import { signinAdmin, signupAdmin } from "../store/adminSlice";
 
 import image from "../images/landing-image.jpeg";
-
-const theme = createTheme();
+import theme from "../theme";
 
 export default function SignInSide() {
   const [isExistUser, setIsExistUser] = useState(true);
@@ -153,7 +152,7 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, bgcolor: "primary.main" }}
               >
                 {isExistUser ? `Sign In` : `Sign Up`}
               </Button>
