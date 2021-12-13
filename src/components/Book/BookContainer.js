@@ -10,11 +10,15 @@ import theme from "../../theme";
 const BookContainer = (props) => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
+  const isUser = useSelector((state) => state.user.isUser);
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
   console.log(books);
 
   useEffect(() => {
-    dispatch(getBooks({ libId: props.libId }));
-  }, [dispatch, props.libId]);
+    if (isUser || isAdmin) {
+      dispatch(getBooks({ libId: props.libId }));
+    }
+  }, [dispatch, props.libId, isUser, isAdmin]);
 
   return (
     <ThemeProvider theme={theme}>

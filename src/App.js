@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getLibraries, getMyLibrary } from "./store/librarySlice";
+import { getCheckoutBooks } from "./store/bookSlice";
 
 import CustomizedSnackbars from "./components/UI/Snackbar";
 import MainHeader from "./components/MainHeader";
@@ -22,6 +23,7 @@ function App() {
   useEffect(() => {
     if (isUser) {
       dispatch(getLibraries());
+      dispatch(getCheckoutBooks());
     }
     if (isAdmin) {
       dispatch(getMyLibrary());

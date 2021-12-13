@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteLibrary } from "../../store/librarySlice";
 import BookContainer from "../Book/BookContainer";
 import BookNewForm from "../Book/BookNewForm";
+import CheckoutBook from "../User/CheckoutBook";
 
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,6 +17,7 @@ const LibraryDetail = () => {
   const libraries = useSelector((state) => state.library.libraries);
   const library = libraries.find((lib) => lib._id === params.libraryId);
   const isAdmin = useSelector((state) => state.admin.isAdmin);
+  const isUser = useSelector((state) => state.user.isUser);
 
   const deleteLibraryHandler = () => {
     dispatch(deleteLibrary({ id: params.libraryId }));
@@ -38,6 +40,7 @@ const LibraryDetail = () => {
         )}
       </h1>
       {isAdmin && <BookNewForm libId={params.libraryId} />}
+      {isUser && <CheckoutBook libId={params.libraryId} />}
       <BookContainer libId={params.libraryId} />
     </section>
   );
