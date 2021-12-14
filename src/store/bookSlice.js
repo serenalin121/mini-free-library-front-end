@@ -44,6 +44,17 @@ export const deleteBook = createAsyncThunk(
 
 export const checkoutBook = createAsyncThunk(
   "checkout/put",
+  async ({ bookId }) => {
+    return await fetch(baseUrl + "/checkout/" + bookId, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    }).then((res) => bookId);
+  }
+);
+
+export const returnBook = createAsyncThunk(
+  "return/put",
   async ({ bookId, libId }) => {
     return await fetch(baseUrl + "/return/" + bookId + "/" + libId, {
       method: "PUT",
@@ -52,14 +63,6 @@ export const checkoutBook = createAsyncThunk(
     }).then((res) => bookId);
   }
 );
-
-export const returnBook = createAsyncThunk("return/put", async ({ bookId }) => {
-  return await fetch(baseUrl + "/checkout/" + bookId, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-  }).then((res) => bookId);
-});
 
 const bookSlice = createSlice({
   name: "book",
@@ -112,15 +115,19 @@ const bookSlice = createSlice({
     builder.addCase(checkoutBook.fulfilled, (state, action) => {
       console.log("checkoutBooks", action.payload);
 
-      return {
+      const test = {
         ...state,
         status: "success",
         books: state.books.filter((book) => book._id !== action.payload),
         checkout: [
           ...state.checkout,
-          state.books.filter((book) => book._id === action.payload),
+          ...state.books.filter((book) => book._id === action.payload),
         ],
       };
+
+      console.log(test);
+
+      return test;
     });
 
     builder.addCase(returnBook.fulfilled, (state, action) => {
@@ -131,9 +138,9 @@ const bookSlice = createSlice({
         status: "success",
         books: [
           ...state.books,
-          state.checkout.filter((book) => book._id === action.payload),
+          ...state.checkout.filter((book) => book._id === action.payload),
         ],
-        checkout: [state.books.filter((book) => book._id !== action.payload)],
+        checkout: state.checkout.filter((book) => book._id !== action.payload),
       };
     });
   },

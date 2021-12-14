@@ -18,8 +18,9 @@ const CheckoutBook = (props) => {
   const checkoutBooks = useSelector((state) => state.book.checkout);
   console.log(checkoutBooks);
 
-  const returnBookHandler = (bookId) => {
-    dispatch(returnBook({ bookId: bookId, libId: props.libId }));
+  const returnBookHandler = (id) => {
+    console.log(id);
+    dispatch(returnBook({ bookId: id, libId: props.libId }));
   };
 
   return (
