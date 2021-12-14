@@ -24,8 +24,7 @@ function App() {
     if (isUser) {
       dispatch(getLibraries());
       dispatch(getCheckoutBooks());
-    }
-    if (isAdmin) {
+    } else if (isAdmin) {
       dispatch(getMyLibrary());
     }
   }, [isUser, isAdmin, dispatch]);

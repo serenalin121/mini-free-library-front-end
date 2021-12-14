@@ -32,6 +32,13 @@ export const signupUser = createAsyncThunk(
   }
 );
 
+export const renewUser = createAsyncThunk("users/renew", async () => {
+  return await fetch(baseUrl + "/renew", {
+    method: "POST",
+    credentials: "include",
+  }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
+});
+
 export const signoutUser = createAsyncThunk("users/signout", async () => {
   return await fetch(baseUrl + "/signout", {
     method: "DELETE",
@@ -77,6 +84,18 @@ const userSlice = createSlice({
         ...state,
         status: "success",
         isUser: false,
+        userInfo: [],
+      };
+    });
+
+    builder.addCase(renewUser.fulfilled, (state, action) => {
+      console.log("renew", action.payload);
+      console.log(action.payload.isAdmin);
+
+      return {
+        ...state,
+        status: "success",
+        isUser: !action.payload.isAdmin,
         userInfo: [],
       };
     });

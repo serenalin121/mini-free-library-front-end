@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { renewUser } from "./userSlice";
 
 const baseUrl = "http://localhost:3003/admins";
 
@@ -32,7 +33,7 @@ export const signupAdmin = createAsyncThunk(
   }
 );
 
-export const signoutAdmin = createAsyncThunk("users/signout", async () => {
+export const signoutAdmin = createAsyncThunk("admin/signout", async () => {
   return await fetch(baseUrl + "/signout", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -77,6 +78,15 @@ const adminSlice = createSlice({
         ...state,
         status: "success",
         isAdmin: false,
+        userInfo: [],
+      };
+    });
+
+    builder.addCase(renewUser.fulfilled, (state, action) => {
+      return {
+        ...state,
+        status: "success",
+        isAdmin: action.payload.isAdmin,
         userInfo: [],
       };
     });
