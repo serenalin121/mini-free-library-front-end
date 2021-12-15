@@ -69,7 +69,7 @@ const LibraryList = (props) => {
 
   return (
     <>
-      <ul>
+      {/* <ul>
         {props.libraries?.map((library, i) => {
           return (
             <li key={i}>
@@ -77,7 +77,7 @@ const LibraryList = (props) => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
       <div>
         <div ref={mapContainer} className="map-container" />
 
