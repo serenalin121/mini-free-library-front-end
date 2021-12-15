@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { renewUser } from "./userSlice";
 
-const baseUrl = "http://localhost:3003/admins";
+const baseUrl = `${process.env.REACT_APP_BASEURL}/admins`;
 
 export const signinAdmin = createAsyncThunk(
   "admins/signin",

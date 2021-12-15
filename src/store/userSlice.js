@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const baseUrl = "http://localhost:3003/users";
+const baseUrl = `${process.env.REACT_APP_BASEURL}/users`;
 
 export const signinUser = createAsyncThunk(
   "users/signin",

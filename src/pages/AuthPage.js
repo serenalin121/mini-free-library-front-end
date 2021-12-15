@@ -165,10 +165,12 @@ export default function SignInSide() {
               </Button>
             </Box>
             <form
-              action={`http://localhost:3003/auth/google/${
+              className="MuiBox-root css-164r41r"
+              noValidate
+              action={`${process.env.REACT_APP_BASEURL}/auth/google/${
                 isAdminLogin ? "admin" : "user"
               }`}
-              style={{ width: "98%" }}
+              style={{ width: "57%" }}
             >
               <Button
                 type="submit"

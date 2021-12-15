@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const baseUrl = "http://localhost:3003/books";
+const baseUrl = `${process.env.REACT_APP_BASEURL}/books`;
 
 export const getBooks = createAsyncThunk("books/get", async ({ libId }) => {
   return await fetch(baseUrl + "/" + libId, { credentials: "include" }).then(

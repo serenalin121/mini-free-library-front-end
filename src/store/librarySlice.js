@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { signoutAdmin } from "./adminSlice";
 
-const baseUrl = "http://localhost:3003/library";
+const baseUrl = `${process.env.REACT_APP_BASEURL}/library`;
 
 export const getLibraries = createAsyncThunk("libraries/get", async () => {
   return await fetch(baseUrl, {
