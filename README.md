@@ -23,10 +23,23 @@ Both admin and user can create an account by providing email and password inform
     - Mapbox API - for admins to add a new library and display all libraries for users
 
 
-## Upcoming features
+## Run the Project
+- Clone this project
+- Clone the [backend repository](https://github.com/serenalin121/mini-free-library-backend). and follow the instructions in there
+- `cd` into the project directory
+- Run `npm install` in your command line
+- Create a `.env` file in the root directory and add your Mapbox Token, and Backend localhost
+- Run `npm start` in your command line
+- Visit http://localhost:3000 in your browser
+
+
+
+## Upcoming Features
 - User can search libraries by zipcode
 - Add other third party login options 
 
+
+## Website Screenshots
 ![Screen Shot 2021-12-16 at 2 19 15 PM](https://user-images.githubusercontent.com/71234575/146457933-1a504660-3826-4315-9ed7-c1a00e42092f.png)
 
 ![Screen Shot 2021-12-16 at 2 20 55 PM](https://user-images.githubusercontent.com/71234575/146457959-2ca7a04d-ccbd-402b-9c6d-b117b96edcb8.png)
