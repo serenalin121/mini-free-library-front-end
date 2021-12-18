@@ -1,6 +1,6 @@
 # Mini Free Library - Frontend
 
-This is the backend repository.
+This is the frontend repository.
 
 Check out the backend repository [here](https://github.com/serenalin121/mini-free-library-backend).
 
