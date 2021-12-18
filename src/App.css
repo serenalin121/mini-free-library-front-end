@@ -38,7 +38,7 @@
 }
 
 .mainContainer {
-  height: calc(100vh - 145px);
+  height: calc(100vh - 160px);
   overflow-y: auto;
 }
 
@@ -84,4 +84,11 @@
   width: 18px;
   height: 18px;
   box-sizing: border-box;
+}
+
+.GitHub-link,
+.GitHub-link:hover {
+  text-decoration: none;
+  color: rgba(0, 34, 67, 0.76);
+  margin-left: 2px;
 }

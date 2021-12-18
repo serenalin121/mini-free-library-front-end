@@ -12,6 +12,7 @@ import LibraryContainer from "./components/Library/LibraryContainer";
 import LibraryNewForm from "./components/Library/LibraryNewForm";
 import AuthPage from "./pages/AuthPage";
 import MyLibrary from "./components/Library/MyLibrary";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 import "./App.css";
 
@@ -43,7 +44,15 @@ function App() {
         </Routes>
       </main>
       <p className="copyright">
-        © Copyright 2021 | Designed and Coded by Serena Lin
+        <a
+          className="GitHub-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/serenalin121/mini-free-library-front-end"
+        >
+          <GitHubIcon fontSize="small" /> GitHub{" "}
+        </a>
+        | © Copyright 2021 | Designed and Coded by Serena Lin
       </p>
     </div>
   );
