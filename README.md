@@ -1,4 +1,4 @@
-# Mini Free Library - Backend
+# Mini Free Library - Frontend
 
 This is the backend repository.
 
